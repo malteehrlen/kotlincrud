@@ -9,4 +9,8 @@
 5. run the server and test some replies
     * `curl 127.0.0.1:8080/customer?id="12345"`
     * `curl -H "Content-Type: application/json" -d @body.json 127.0.0.1:8080/customer`
-
+6. containerize
+    * add dockerfile
+    * docker build
+    * docker run -p 8080:8080 kotlincrud
+7. run a db in docker (postgres)
