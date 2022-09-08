@@ -1,0 +1,5 @@
+1. `gradle init`
+        * application
+        * kotlin
+        * one app project
+        * kotlin build script DSL
