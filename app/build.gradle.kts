@@ -18,6 +18,11 @@ repositories {
     maven { url = uri("https://maven.pkg.jetbrains.space/public/p/ktor/eap") }
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_17 // new
+    targetCompatibility = JavaVersion.VERSION_17 // new
+}
+
 dependencies {
     implementation("io.ktor:ktor-server-core:$ktor_version")
     implementation("io.ktor:ktor-server-netty:$ktor_version")

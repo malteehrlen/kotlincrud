@@ -3,3 +3,10 @@
         * kotlin
         * one app project
         * kotlin build script DSL
+2. set kotlin versions and ktor dependencies
+3. add a simple model, handler and plugins for routing and serialization
+4. make sure it builds
+5. run the server and test some replies
+    * `curl 127.0.0.1:8080/customer?id="12345"`
+    * `curl -H "Content-Type: application/json" -d @body.json 127.0.0.1:8080/customer`
+
