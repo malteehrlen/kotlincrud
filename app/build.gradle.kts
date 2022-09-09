@@ -8,7 +8,10 @@ plugins {
     id("org.jetbrains.kotlin.jvm") version "1.7.10"
     id("io.ktor.plugin") version "2.1.1"
     id("org.jetbrains.kotlin.plugin.serialization") version "1.7.10"
+    id("com.ncorti.ktfmt.gradle") version "0.10.0"
 }
+
+ktfmt { kotlinLangStyle() }
 
 application {
     mainClass.set("io.ktor.server.netty.EngineMain")
@@ -17,6 +20,7 @@ application {
 repositories {
     mavenCentral()
     maven { url = uri("https://maven.pkg.jetbrains.space/public/p/ktor/eap") }
+    maven { url = uri("https://plugins.gradle.org/m2/") }
 }
 
 java {

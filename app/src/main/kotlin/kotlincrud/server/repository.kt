@@ -1,5 +1,4 @@
 import java.sql.DriverManager
-import java.sql.Connection
 import kotlincrud.models.Customer
 
 object DB {
@@ -10,35 +9,34 @@ object DB {
     private val dbPassword = System.getenv("POSTGRES_PASSWORD")
     private val url = "jdbc:postgresql://$host:$port/$dbName"
 
-    val connection = DriverManager
-        .getConnection(url, dbUser, dbPassword)
+    val connection = DriverManager.getConnection(url, dbUser, dbPassword)
 
-    val getCustomerQuery = connection.prepareStatement(
-        "SELECT id, firstName, lastName, email FROM customers WHERE id = ?;"
-    )
+    val getCustomerQuery =
+        connection.prepareStatement(
+            "SELECT id, firstName, lastName, email FROM customers WHERE id = ?;"
+        )
 
-    val setCustomerStatement = connection.prepareStatement(
-        "INSERT INTO customers (id, firstName, lastName, email) VALUES (?, ?, ?, ?) ON CONFLICT (id) DO UPDATE SET firstName = ?, lastName = ?, email = ?;"
-    )
+    val setCustomerStatement =
+        connection.prepareStatement(
+            "INSERT INTO customers (id, firstName, lastName, email) VALUES (?, ?, ?, ?) ON CONFLICT (id) DO UPDATE SET firstName = ?, lastName = ?, email = ?;"
+        )
 
-    val deleteCustomerStatement = connection.prepareStatement(
-        "DELETE FROM customers WHERE id = ?;"
-    )
+    val deleteCustomerStatement = connection.prepareStatement("DELETE FROM customers WHERE id = ?;")
 
     fun getCustomer(id: String): Customer? {
         getCustomerQuery.setString(1, id)
         val res = getCustomerQuery.executeQuery()
-           while (res.next()) {
-                // returns the first result as there can be a maximum of one hit
-                return Customer(
-                    id = res.getString("id"),
-                    firstName = res.getString("firstName"),
-                    lastName = res.getString("lastName"),
-                    email = res.getString("email"),
-                )
-            }
-            return null
+        while (res.next()) {
+            // returns the first result as there can be a maximum of one hit
+            return Customer(
+                id = res.getString("id"),
+                firstName = res.getString("firstName"),
+                lastName = res.getString("lastName"),
+                email = res.getString("email"),
+            )
         }
+        return null
+    }
 
     fun setCustomer(customer: Customer) {
 
