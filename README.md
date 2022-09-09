@@ -1,5 +1,7 @@
 # kotlincrud
 example microservice without bloat such as spring or ORM
+## Build a docker image
+Run `docker build -t kotlincrud:latest .`
 ## Start the services
 Run `docker-compose --env-file dbcredentials.env up -d`. This will start postgres and kotlincrud.
 
