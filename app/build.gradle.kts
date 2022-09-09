@@ -1,6 +1,7 @@
 val ktor_version = "2.1.1"
 val kotlin_version = "1.7.10"
 val logback_version = "1.2.11"
+val postgres_version = "42.3.3"
 
 plugins {
     application
@@ -29,6 +30,7 @@ dependencies {
     implementation("io.ktor:ktor-server-content-negotiation:$ktor_version")
     implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
     implementation("ch.qos.logback:logback-classic:$logback_version")
+    implementation("org.postgresql:postgresql:$postgres_version")
     testImplementation("io.ktor:ktor-server-test-host:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }
