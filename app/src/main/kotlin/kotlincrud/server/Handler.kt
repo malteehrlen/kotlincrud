@@ -24,8 +24,12 @@ fun Route.customerRouting() {
 
         post {
             val customer = call.receive<Customer>()
-            DB.setCustomer(customer)
-            call.respondText("Customer stored correctly", status = HttpStatusCode.Created)
+            try {
+                DB.setCustomer(customer)
+                call.respond(HttpStatusCode.OK)
+            } catch (e: Throwable) {
+                call.respondText("Could not set customer", status = HttpStatusCode.BadRequest)
+            }
         }
 
         delete("{id?}") {
@@ -35,8 +39,12 @@ fun Route.customerRouting() {
                         "Missing id",
                         status = HttpStatusCode.BadRequest
                     )
-            DB.deleteCustomer(id)
-            call.respond(HttpStatusCode.OK)
+            try {
+                DB.deleteCustomer(id)
+                call.respond(HttpStatusCode.OK)
+            } catch (e: Throwable) {
+                call.respondText("Could not delete customer", status = HttpStatusCode.BadRequest)
+            }
         }
     }
 }
