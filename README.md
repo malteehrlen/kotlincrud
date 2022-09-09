@@ -7,7 +7,7 @@ Create the table by running `psql -h 0.0.0.0 -p 54321 --user kotlincrud -d custo
 
 ## Try it out
 
-* Create a cusotmer: `curl -H "Content-Type: application/json" -d @body.json 0.0.0.0:8080/customer`
+* Create a customer: `curl -H "Content-Type: application/json" -d @body.json 0.0.0.0:8080/customer`
 * Get it: `curl 127.0.0.1:8080/customer?id=12345`
 * Delete it: `curl -X DELETE 127.0.0.1:8080/customer?id=12345`
 * You can test the update part by modifying `body.json`
