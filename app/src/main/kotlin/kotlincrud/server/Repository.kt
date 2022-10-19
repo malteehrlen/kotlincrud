@@ -1,7 +1,8 @@
 import java.sql.DriverManager
 import kotlincrud.models.Customer
 
-object DB {
+object Repository {
+    // Note: Never access system env like this
     private val host = System.getenv("POSTGRES_HOST")
     private val port = System.getenv("POSTGRES_PORT")
     private val dbName = System.getenv("POSTGRES_NAME")

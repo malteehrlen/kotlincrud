@@ -12,11 +12,14 @@ fun Route.customerRouting() {
         get("{id?}") {
             val id =
                 call.parameters["id"]
-                    ?: return@get call.respondText("Missing id", status = HttpStatusCode.BadRequest)
-            val customer =
-                DB.getCustomer(id)
                     ?: return@get call.respondText(
-                        "No customer with id $id",
+                        text = "Missing id", 
+                        status = HttpStatusCode.BadRequest
+                    )
+            val customer =
+                Repository.getCustomer(id)
+                    ?: return@get call.respondText(
+                        text = "No customer with id $id",
                         status = HttpStatusCode.NotFound
                     )
             call.respond(customer)
@@ -25,10 +28,13 @@ fun Route.customerRouting() {
         post {
             val customer = call.receive<Customer>()
             try {
-                DB.setCustomer(customer)
+                Repository.setCustomer(customer)
                 call.respond(HttpStatusCode.OK)
             } catch (e: Throwable) {
-                call.respondText("Could not set customer", status = HttpStatusCode.BadRequest)
+                call.respondText(
+                        text = "Could not set customer", 
+                        status = HttpStatusCode.BadRequest
+                    )
             }
         }
 
@@ -36,14 +42,17 @@ fun Route.customerRouting() {
             val id =
                 call.parameters["id"]
                     ?: return@delete call.respondText(
-                        "Missing id",
+                        text = "Missing id",
                         status = HttpStatusCode.BadRequest
                     )
             try {
-                DB.deleteCustomer(id)
+                Repository.deleteCustomer(id)
                 call.respond(HttpStatusCode.OK)
             } catch (e: Throwable) {
-                call.respondText("Could not delete customer", status = HttpStatusCode.BadRequest)
+                call.respondText(
+                    text = "Could not delete customer", 
+                    status = HttpStatusCode.BadRequest
+                )
             }
         }
     }
